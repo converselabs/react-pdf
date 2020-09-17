@@ -30,7 +30,7 @@ var PdfViewer = /*#__PURE__*/function (_PureComponent) {
       scale: 1.2,
       progress: 0,
       currentPage: 1,
-      showSearchBar: false,
+      showSearchBar: _this.props.showSearchBar,
       showThumbSidebar: _this.props.showThumbnailSidebar
     });
 
@@ -142,7 +142,9 @@ var PdfViewer = /*#__PURE__*/function (_PureComponent) {
     var _this$props = this.props,
         url = _this$props.url,
         showProgressBar = _this$props.showProgressBar,
-        showToolbox = _this$props.showToolbox;
+        showToolbox = _this$props.showToolbox,
+        searchTerm = _this$props.searchTerm;
+    console.log("main", progress);
     return /*#__PURE__*/React.createElement("div", {
       id: "viewer-container"
     }, showProgressBar && /*#__PURE__*/React.createElement(PDFProgressBar, {
@@ -151,7 +153,9 @@ var PdfViewer = /*#__PURE__*/function (_PureComponent) {
       id: "viewer"
     }, showSearchBar && /*#__PURE__*/React.createElement(PDFSearchBar, {
       pdfFindController: this._pdfFindController,
-      hideSearchBar: this.hideSearchBar
+      hideSearchBar: this.hideSearchBar,
+      searchTerm: searchTerm,
+      progress: progress
     }), /*#__PURE__*/React.createElement(PDFThumbBar, {
       pdf: pdf,
       currentPage: currentPage,

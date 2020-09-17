@@ -69,6 +69,7 @@ class Toolbox extends Component {
       onZoomOut,
       showSearchBar,
       onChangePage,
+      showThumbSidebar
     } = this.props;
 
     const numPages = this.props.pdf ? this.props.pdf.numPages : '-';
@@ -77,7 +78,7 @@ class Toolbox extends Component {
       <div className="toolbox-container">
         <div className="toolbox-wrapper">
           <div className="toolbox">
-            <Thumbnail id="thumbnail-icon" onClick={toggleThumbnail} />
+            {showThumbSidebar && <Thumbnail id="thumbnail-icon" onClick={toggleThumbnail} />}
 
             <div className="page-navigation">
               <PageUp

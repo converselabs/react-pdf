@@ -22,6 +22,7 @@ var SearchBar = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onSearch", function () {
       var searchTerm = _this.searchInput.current.value;
+      console.log("onSearch", searchTerm);
 
       _this.setState({
         searchTerm: searchTerm,
@@ -135,7 +136,7 @@ var SearchBar = /*#__PURE__*/function (_Component) {
     });
 
     _this.state = {
-      searchTerm: '',
+      searchTerm: props.searchTerm || '',
       currentMatchIndex: 1,
       matchCount: undefined,
       searchCompleted: false
@@ -146,17 +147,25 @@ var SearchBar = /*#__PURE__*/function (_Component) {
 
   var _proto = SearchBar.prototype;
 
+  _proto.componentWillReceiveProps = function componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps.progress === 100) {
+      this.onSearch(this.state.searchTerm);
+    }
+  };
+
   _proto.render = function render() {
     var _this$state2 = this.state,
         searchTerm = _this$state2.searchTerm,
         currentMatchIndex = _this$state2.currentMatchIndex,
         matchCount = _this$state2.matchCount,
         searchCompleted = _this$state2.searchCompleted;
+    console.log(this.props.progress);
     return /*#__PURE__*/React.createElement("div", {
       id: "pdfSearchbar"
     }, /*#__PURE__*/React.createElement("input", {
       ref: this.searchInput,
       autoFocus: true,
+      value: searchTerm,
       placeholder: "Search in document",
       onChange: this.onSearchTerm,
       onKeyDown: this.onSearchNext

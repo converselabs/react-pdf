@@ -15,7 +15,7 @@ class PdfViewer extends PureComponent {
     scale: 1.2,
     progress: 0,
     currentPage: 1,
-    showSearchBar: false,
+    showSearchBar: this.props.showSearchBar,
     showThumbSidebar: this.props.showThumbnailSidebar,
   };
 
@@ -109,9 +109,12 @@ class PdfViewer extends PureComponent {
     const {
       url,
       showProgressBar,
-      showToolbox
+      showToolbox,
+      searchTerm
     } = this.props;
-    
+
+    console.log("main", progress);
+
     return (
       <div id="viewer-container">
         {showProgressBar && <PDFProgressBar progress={progress} />}
@@ -122,6 +125,8 @@ class PdfViewer extends PureComponent {
             <PDFSearchBar
               pdfFindController={this._pdfFindController}
               hideSearchBar={this.hideSearchBar}
+              searchTerm={searchTerm}
+              progress={progress}
             />
           }
 

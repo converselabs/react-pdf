@@ -5,6 +5,7 @@ import { CloseIcon, NextIcon, PrevIcon } from '../../assets';
 import './index.scss';
 
 const FIND_STATUS_TIMEOUT = 500;
+
 class SearchBar extends Component {
   searchInput = React.createRef();
 
@@ -12,7 +13,7 @@ class SearchBar extends Component {
     super(props);
 
     this.state = {
-      searchTerm: '',
+      searchTerm: props.searchTerm || '',
       currentMatchIndex: 1,
       matchCount: undefined,
       searchCompleted: false,
@@ -21,9 +22,16 @@ class SearchBar extends Component {
     this.onSearchTerm = debounce(this.onSearch.bind(this), 500);
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    if(nextProps.progress === 100){
+      this.onSearch(this.state.searchTerm);
+    }
+  }
+
   onSearch = () => {
     const searchTerm = this.searchInput.current.value;
 
+    console.log("onSearch", searchTerm);
     this.setState({
       searchTerm,
       searchCompleted: false,
@@ -124,11 +132,14 @@ class SearchBar extends Component {
       searchCompleted,
     } = this.state;
 
+    console.log(this.props.progress);
+
     return (
       <div id="pdfSearchbar">
         <input
           ref={this.searchInput}
           autoFocus
+          value={searchTerm}
           placeholder="Search in document"
           onChange={this.onSearchTerm}
           onKeyDown={this.onSearchNext}

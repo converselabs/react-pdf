@@ -80,7 +80,8 @@ var Toolbox = /*#__PURE__*/function (_Component) {
         onZoomIn = _this$props3.onZoomIn,
         onZoomOut = _this$props3.onZoomOut,
         showSearchBar = _this$props3.showSearchBar,
-        onChangePage = _this$props3.onChangePage;
+        onChangePage = _this$props3.onChangePage,
+        showThumbSidebar = _this$props3.showThumbSidebar;
     var numPages = this.props.pdf ? this.props.pdf.numPages : '-';
     return /*#__PURE__*/React.createElement("div", {
       className: "toolbox-container"
@@ -88,7 +89,7 @@ var Toolbox = /*#__PURE__*/function (_Component) {
       className: "toolbox-wrapper"
     }, /*#__PURE__*/React.createElement("div", {
       className: "toolbox"
-    }, /*#__PURE__*/React.createElement(Thumbnail, {
+    }, showThumbSidebar && /*#__PURE__*/React.createElement(Thumbnail, {
       id: "thumbnail-icon",
       onClick: toggleThumbnail
     }), /*#__PURE__*/React.createElement("div", {
